@@ -122,20 +122,30 @@ namespace DotNet
             }
             public void Show(string s)
            {
-               foreach(Dictionary d in lst)
+                if(lst.Count<1)
+                    Console.WriteLine("Dictionary is empty");
+                else
                 {
-                    foreach (string w in d.Eng)
+                    bool exist = false;
+                    foreach (Dictionary d in lst)
                     {
-                        if (s == w)
+                        foreach (string w in d.Eng)
                         {
+                            if (s == w)
+                            {
+                                Console.WriteLine($"Translate for \"{s}\":");
+                                exist = true;
+                                for (int i = 0; i < d.Ukr.Count; i++)
+                                    Console.WriteLine(d.Ukr[i]);
 
-                            for (int i = 0; i < d.Ukr.Count; i++)
-                                Console.WriteLine(d.Ukr[i]);
-                            
+                            }
                         }
+
                     }
-                        
+                    if(exist == false)
+                        Console.WriteLine($"Word \"{s}\" is not exist in dictionary");
                 }
+               
                     
            }
 
@@ -181,6 +191,16 @@ namespace DotNet
             }
 
         }
+        public void Menu()
+        {
+            Console.WriteLine("Select action:");
+            Console.WriteLine("Add word");
+            Console.WriteLine("Add translate");
+            Console.WriteLine("Delete word");
+            Console.WriteLine("Delete translate");
+            Console.WriteLine("Show word and its translate");
+
+        }
         
 
         static void Main(string[] args)
@@ -189,15 +209,14 @@ namespace DotNet
             Library lb = new Library();
             //lb.AddWordEn("dog");
             //lb.AddWordEn("cat");
-
-                lb.AddWordEn("fish");
+            lb.Show("fish");
+            lb.AddWordEn("fish");
                 lb.AddWordEn("bird");
-                lb.Show("fish");
                 lb.AddUrkTrans("fish");
                 lb.Show("fish");
-           
+            lb.Show("cat");
             /*
-            char c = 'A';//65
+             char c = 'A';//65
             char c1 = 'Z';//90
             char d = 'a';//97
             char d1 = 'z';//122
@@ -205,14 +224,9 @@ namespace DotNet
             char e1 = 'Я';//1071
             char f = 'а';//1072
             char f1 = 'я';//1103
-            
-             Console.WriteLine((int)c+" "+(int)d+" "+(int)c1 + " " + (int)d1 + " " + (int)e + " " + (int)f + " " + (int)e1 + " " + (int)f1);
+
+            Console.WriteLine((int)c+" "+(int)d+" "+(int)c1 + " " + (int)d1 + " " + (int)e + " " + (int)f + " " + (int)e1 + " " + (int)f1);
              */
-
-
-
-
-
 
 
         }
